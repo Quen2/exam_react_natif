@@ -33,13 +33,14 @@
   },
   "events": {
     "title": "Événements",
+    "create": "Créer un événement",
     "filters": {
       "upcoming": "À venir",
       "mine": "J'y vais",
       "past": "Passés"
     },
     "empty": {
-      "upcoming": "Aucun événement à venir.",
+      "upcoming": "Aucun événement à venir. Crée le premier !",
       "mine": "Tu ne participes à aucun événement pour le moment.",
       "past": "Aucun événement passé."
     },
@@ -62,6 +63,31 @@
     "pastEvent": "Cet événement est terminé",
     "notFound": "Cet événement n'existe plus.",
     "unknownUser": "Membre supprimé",
-    "noParticipants": "Personne pour l'instant."
+    "noParticipants": "Personne pour l'instant.",
+    "edit": "Modifier",
+    "delete": "Supprimer",
+    "confirmDelete": "Confirmer la suppression ?"
+  },
+  "form": {
+    "createTitle": "Nouvel événement",
+    "editTitle": "Modifier l'événement",
+    "title": "Titre",
+    "titlePlaceholder": "Ex : Atelier couture....",
+    "description": "Description",
+    "descriptionPlaceholder": "Décrivez l'événement....",
+    "location": "Lieu (optionnel)",
+    "locationPlaceholder": "Ex : Salle des fêtes, Lyon....",
+    "date": "Date",
+    "time": "Heure",
+    "webDate": "Date et heure",
+    "webDatePlaceholder": "JJ/MM/AAAA HH:MM",
+    "confirmPicker": "Valider",
+    "create": "Créer l'événement",
+    "save": "Enregistrer les modifications",
+    "errors": {
+      "title": "Le titre est obligatoire",
+      "description": "La description est obligatoire",
+      "date": "La date n'est pas valide (format JJ/MM/AAAA HH:MM)"
+    }
   }
 }

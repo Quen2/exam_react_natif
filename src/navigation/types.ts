@@ -3,6 +3,7 @@ export type RootStackParamList = {
     SignUp: undefined;
     EventList: undefined;
     EventDetail: {id: string};
+    EventForm: {id?: string};
 };
 
 declare global {

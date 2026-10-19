@@ -7,6 +7,7 @@ import SignInScreen from "@/screens/SignInScreen";
 import SignUpScreen from "@/screens/SignUpScreen";
 import EventListScreen from "@/screens/EventListScreen";
 import EventDetailScreen from "@/screens/EventDetailScreen";
+import EventFormScreen from "@/screens/EventFormScreen";
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
@@ -28,6 +29,7 @@ export default function RootNavigator () {
                 <>
                     <Stack.Screen name="EventList" component={EventListScreen} />
                     <Stack.Screen name="EventDetail" component={EventDetailScreen} />
+                    <Stack.Screen name="EventForm" component={EventFormScreen} />
                 </>
             ) : (
                 <>
