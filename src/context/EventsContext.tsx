@@ -49,12 +49,26 @@ export function EventsProvider({ children }: { children: ReactNode }) {
 
     const isParticipating = (event: EventType) => !!user && event.participants.includes(user.email);
 
+    const toggleParticipation = async (id: string) => {
+        if (!user) return;
+
+        await persist(events.map((event) => {
+            if (event.id !== id) return event;
+
+            const participants = event.participants.includes(user.email)
+                ? event.participants.filter((email) => email !== user.email)
+                : [...event.participants, user.email];
+
+            return {...event, participants};
+        }));
+    };
+
     const canManage = (event: EventType) =>
         !!user && (user.role === "admin" || event.createdBy === user.email);
 
     return (
         <EventsContext.Provider
-            value={{ events, loading, getEvent, addEvent, updateEvent, deleteEvent, isParticipating, canManage }}
+            value={{ events, loading, getEvent, addEvent, updateEvent, deleteEvent, toggleParticipation, isParticipating, canManage }}
         >
             {children}
         </EventsContext.Provider>

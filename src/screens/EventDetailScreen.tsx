@@ -13,6 +13,7 @@ import {MESSAGE_CLASS, palette} from "@/theme/palette";
 import Halftone from "@/components/Halftone";
 import BackButton from "@/components/BackButton";
 import SectionTitle from "@/components/SectionTitle";
+import ActionButton from "@/components/ActionButton";
 import StickIn from "@/components/StickIn";
 
 type Props = NativeStackScreenProps<RootStackParamList, "EventDetail">;
@@ -35,7 +36,7 @@ function InfoRow ({icon, label, value}: {icon: IconName; label: string; value: s
 
 export default function EventDetailScreen ({route, navigation}: Props) {
     const {id} = route.params;
-    const {getEvent, isParticipating, canManage, deleteEvent} = useEvents();
+    const {getEvent, toggleParticipation, isParticipating, canManage, deleteEvent} = useEvents();
     const [users, setUsers] = useState<UserType[]>([]);
     const [confirmDelete, setConfirmDelete] = useState<boolean>(false);
     const insets = useSafeAreaInsets();
@@ -123,6 +124,16 @@ export default function EventDetailScreen ({route, navigation}: Props) {
                         </View>
                     </View>
                 </StickIn>
+
+                {!past ? (
+                    <View className="mt-10">
+                        <ActionButton
+                            label={going ? t("detail.cancelParticipation") : t("detail.participate")}
+                            onPress={() => toggleParticipation(event.id)}
+                            variant={going ? "dark" : "light"}
+                        />
+                    </View>
+                ) : null}
 
                 {canManage(event) ? (
                     <View className="mt-6 flex-row gap-3">
