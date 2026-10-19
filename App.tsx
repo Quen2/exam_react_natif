@@ -9,6 +9,7 @@ import * as SplashScreen from "expo-splash-screen";
 import {useFonts, Inter_300Light, Inter_400Regular, Inter_500Medium, Inter_600SemiBold} from "@expo-google-fonts/inter";
 import {Bungee_400Regular} from "@expo-google-fonts/bungee";
 import {AuthProvider} from "@/context/AuthContext";
+import {EventsProvider} from "@/context/EventsContext";
 import RootNavigator from "@/navigation/RootNavigator";
 import {palette} from "@/theme/palette";
 
@@ -31,10 +32,12 @@ export default function App() {
     return (
         <SafeAreaProvider>
             <AuthProvider>
-                <NavigationContainer theme={theme}>
-                    <StatusBar style="light" />
-                    <RootNavigator />
-                </NavigationContainer>
+                <EventsProvider>
+                    <NavigationContainer theme={theme}>
+                        <StatusBar style="light" />
+                        <RootNavigator />
+                    </NavigationContainer>
+                </EventsProvider>
             </AuthProvider>
         </SafeAreaProvider>
     );
