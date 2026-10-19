@@ -1,4 +1,4 @@
-import {ScrollView, Text, View} from "react-native";
+import {Pressable, ScrollView, Text, View} from "react-native";
 import {useSafeAreaInsets} from "react-native-safe-area-context";
 import {NativeStackScreenProps} from "@react-navigation/native-stack";
 import {useEffect, useState} from "react";
@@ -33,10 +33,11 @@ function InfoRow ({icon, label, value}: {icon: IconName; label: string; value: s
     )
 }
 
-export default function EventDetailScreen ({route}: Props) {
+export default function EventDetailScreen ({route, navigation}: Props) {
     const {id} = route.params;
-    const {getEvent, isParticipating} = useEvents();
+    const {getEvent, isParticipating, canManage, deleteEvent} = useEvents();
     const [users, setUsers] = useState<UserType[]>([]);
+    const [confirmDelete, setConfirmDelete] = useState<boolean>(false);
     const insets = useSafeAreaInsets();
     const {t} = useTranslation();
 
@@ -59,6 +60,15 @@ export default function EventDetailScreen ({route}: Props) {
     const past = isPast(event.date);
     const usernameOf = (email: string) =>
         users.find((user) => user.email === email)?.username ?? t("detail.unknownUser");
+
+    const handleDelete = async () => {
+        if (!confirmDelete) {
+            setConfirmDelete(true);
+            return;
+        }
+        navigation.goBack();
+        await deleteEvent(event.id);
+    }
 
     return (
         <View className="flex-1 bg-background">
@@ -114,6 +124,28 @@ export default function EventDetailScreen ({route}: Props) {
                     </View>
                 </StickIn>
 
+                {canManage(event) ? (
+                    <View className="mt-6 flex-row gap-3">
+                        <Pressable
+                            onPress={() => navigation.navigate("EventForm", {id: event.id})}
+                            accessibilityRole="button"
+                            className="h-11 flex-1 items-center justify-center bg-deep active:opacity-80"
+                        >
+                            <Text className="font-bungee text-xs text-ink">{t("detail.edit")}</Text>
+                        </Pressable>
+                        <Pressable
+                            onPress={handleDelete}
+                            accessibilityRole="button"
+                            className={`h-11 flex-1 items-center justify-center active:opacity-80 ${
+                                confirmDelete ? "bg-accent" : "bg-surface"
+                            }`}
+                        >
+                            <Text className={`text-center font-bungee text-xs ${confirmDelete ? "text-night" : "text-ink"}`}>
+                                {confirmDelete ? t("detail.confirmDelete") : t("detail.delete")}
+                            </Text>
+                        </Pressable>
+                    </View>
+                ) : null}
             </ScrollView>
         </View>
     )
