@@ -31,9 +31,37 @@
     "passwordTooShort": "Le mot de passe doit faire au moins 6 caractères",
     "emailTaken": "Un compte existe déjà avec cet email"
   },
-  "home": {
-    "welcome": "Salut {{name}} !",
-    "soon": "Les événements arrivent bientôt. En attendant, tu es bien connecté.",
+  "events": {
+    "title": "Événements",
+    "filters": {
+      "upcoming": "À venir",
+      "mine": "J'y vais",
+      "past": "Passés"
+    },
+    "empty": {
+      "upcoming": "Aucun événement à venir.",
+      "mine": "Tu ne participes à aucun événement pour le moment.",
+      "past": "Aucun événement passé."
+    },
+    "participants_one": "{{count}} participant",
+    "participants_other": "{{count}} participants",
+    "going": "J'y vais",
+    "past": "Terminé",
     "logout": "Se déconnecter"
+  },
+  "detail": {
+    "back": "Retour",
+    "date": "Date",
+    "time": "Heure",
+    "location": "Lieu",
+    "noLocation": "Non précisé",
+    "organizer": "Organisé par",
+    "description": "Description",
+    "participants": "Participants",
+    "participating": "Tu participes à cet événement",
+    "pastEvent": "Cet événement est terminé",
+    "notFound": "Cet événement n'existe plus.",
+    "unknownUser": "Membre supprimé",
+    "noParticipants": "Personne pour l'instant."
   }
 }
