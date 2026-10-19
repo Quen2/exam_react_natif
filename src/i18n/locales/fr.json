@@ -31,6 +31,10 @@
     "passwordTooShort": "Le mot de passe doit faire au moins 6 caractères",
     "emailTaken": "Un compte existe déjà avec cet email"
   },
+  "tabs": {
+    "events": "Événements",
+    "profile": "Profil"
+  },
   "events": {
     "title": "Événements",
     "create": "Créer un événement",
@@ -47,8 +51,7 @@
     "participants_one": "{{count}} participant",
     "participants_other": "{{count}} participants",
     "going": "J'y vais",
-    "past": "Terminé",
-    "logout": "Se déconnecter"
+    "past": "Terminé"
   },
   "detail": {
     "back": "Retour",
@@ -59,14 +62,16 @@
     "organizer": "Organisé par",
     "description": "Description",
     "participants": "Participants",
+    "participate": "Je participe",
+    "cancelParticipation": "Je ne participe plus",
     "participating": "Tu participes à cet événement",
     "pastEvent": "Cet événement est terminé",
-    "notFound": "Cet événement n'existe plus.",
-    "unknownUser": "Membre supprimé",
-    "noParticipants": "Personne pour l'instant.",
     "edit": "Modifier",
     "delete": "Supprimer",
-    "confirmDelete": "Confirmer la suppression ?"
+    "confirmDelete": "Confirmer la suppression ?",
+    "notFound": "Cet événement n'existe plus.",
+    "unknownUser": "Membre supprimé",
+    "noParticipants": "Personne pour l'instant. Sois le premier !"
   },
   "form": {
     "createTitle": "Nouvel événement",
@@ -89,5 +94,20 @@
       "description": "La description est obligatoire",
       "date": "La date n'est pas valide (format JJ/MM/AAAA HH:MM)"
     }
+  },
+  "profile": {
+    "title": "Profil",
+    "admin": "Admin",
+    "stats": {
+      "participations": "Participations",
+      "created": "Créés"
+    },
+    "myInfos": "Mes informations",
+    "username": "Nom d'utilisateur",
+    "usernamePlaceholder": "Entrez votre nom d'utilisateur....",
+    "update": "Modifier mes informations",
+    "updated": "Informations mises à jour",
+    "emptyUsername": "Le pseudo ne peut pas être vide",
+    "logout": "Se déconnecter"
   }
 }

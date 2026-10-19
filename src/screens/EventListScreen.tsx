@@ -1,12 +1,13 @@
 import {FlatList, Text, View} from "react-native";
 import {useSafeAreaInsets} from "react-native-safe-area-context";
+import {BottomTabScreenProps} from "@react-navigation/bottom-tabs";
+import {CompositeScreenProps} from "@react-navigation/native";
 import {NativeStackScreenProps} from "@react-navigation/native-stack";
 import {useState} from "react";
 import {useTranslation} from "react-i18next";
-import {useAuth} from "@/context/AuthContext";
 import {useEvents} from "@/context/EventsContext";
 import {EventType} from "@/type/event/eventType";
-import {RootStackParamList} from "@/navigation/types";
+import {RootStackParamList, TabParamList} from "@/navigation/types";
 import {isPast} from "@/utils/date";
 import Logo from "@/components/Logo";
 import Halftone from "@/components/Halftone";
@@ -15,7 +16,10 @@ import SegmentedControl from "@/components/SegmentedControl";
 import ActionButton from "@/components/ActionButton";
 import EventCard from "@/components/EventCard";
 
-type Props = NativeStackScreenProps<RootStackParamList, "EventList">;
+type Props = CompositeScreenProps<
+    BottomTabScreenProps<TabParamList, "Events">,
+    NativeStackScreenProps<RootStackParamList>
+>;
 
 type Filter = "upcoming" | "mine" | "past";
 
@@ -23,7 +27,6 @@ const byDateAsc = (a: EventType, b: EventType) => new Date(a.date).getTime() - n
 const byDateDesc = (a: EventType, b: EventType) => byDateAsc(b, a);
 
 export default function EventListScreen ({navigation}: Props) {
-    const {logout} = useAuth();
     const {events, isParticipating} = useEvents();
     const [filter, setFilter] = useState<Filter>("upcoming");
     const insets = useSafeAreaInsets();
@@ -71,12 +74,6 @@ export default function EventListScreen ({navigation}: Props) {
                 }
                 ListEmptyComponent={
                     <Text className="mt-2 font-inter text-sm text-outline">{t(`events.empty.${filter}`)}</Text>
-                }
-                ListFooterComponent={
-                    // Temporaire : la déconnexion passera dans l'écran Profil
-                    <View className="mt-8">
-                        <ActionButton label={t("events.logout")} onPress={logout} variant="dark" />
-                    </View>
                 }
             />
         </View>

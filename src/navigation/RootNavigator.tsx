@@ -3,9 +3,9 @@ import {useAuth} from "@/context/AuthContext";
 import {useEvents} from "@/context/EventsContext";
 import {RootStackParamList} from "@/navigation/types";
 import {palette} from "@/theme/palette";
+import MainTabs from "@/navigation/MainTabs";
 import SignInScreen from "@/screens/SignInScreen";
 import SignUpScreen from "@/screens/SignUpScreen";
-import EventListScreen from "@/screens/EventListScreen";
 import EventDetailScreen from "@/screens/EventDetailScreen";
 import EventFormScreen from "@/screens/EventFormScreen";
 
@@ -27,7 +27,7 @@ export default function RootNavigator () {
         >
             {isAuthenticated ? (
                 <>
-                    <Stack.Screen name="EventList" component={EventListScreen} />
+                    <Stack.Screen name="MainTabs" component={MainTabs} />
                     <Stack.Screen name="EventDetail" component={EventDetailScreen} />
                     <Stack.Screen name="EventForm" component={EventFormScreen} />
                 </>
