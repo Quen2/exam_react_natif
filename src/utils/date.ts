@@ -31,3 +31,20 @@ export function formatMonth(iso: string): string {
 export function isPast(iso: string): boolean {
     return new Date(iso).getTime() < Date.now();
 }
+
+// "JJ/MM/AAAA HH:MM" <-> Date (saisie sur le web, où il n'y a pas de sélecteur natif)
+export function toInputString(date: Date): string {
+    const pad = (value: number) => String(value).padStart(2, "0");
+    return `${pad(date.getDate())}/${pad(date.getMonth() + 1)}/${date.getFullYear()} ${pad(date.getHours())}:${pad(date.getMinutes())}`;
+}
+
+export function parseInputString(value: string): Date | null {
+    const match = value.trim().match(/^(\d{2})\/(\d{2})\/(\d{4})\s+(\d{2}):(\d{2})$/);
+    if (!match) return null;
+
+    const [, day, month, year, hours, minutes] = match.map(Number);
+    const date = new Date(year, month - 1, day, hours, minutes);
+
+    const isSameDate = date.getDate() === day && date.getMonth() === month - 1 && date.getFullYear() === year;
+    return isSameDate && hours < 24 && minutes < 60 ? date : null;
+}

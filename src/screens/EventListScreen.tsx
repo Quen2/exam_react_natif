@@ -1,10 +1,12 @@
 import {FlatList, Text, View} from "react-native";
 import {useSafeAreaInsets} from "react-native-safe-area-context";
+import {NativeStackScreenProps} from "@react-navigation/native-stack";
 import {useState} from "react";
 import {useTranslation} from "react-i18next";
 import {useAuth} from "@/context/AuthContext";
 import {useEvents} from "@/context/EventsContext";
 import {EventType} from "@/type/event/eventType";
+import {RootStackParamList} from "@/navigation/types";
 import {isPast} from "@/utils/date";
 import Logo from "@/components/Logo";
 import Halftone from "@/components/Halftone";
@@ -13,12 +15,14 @@ import SegmentedControl from "@/components/SegmentedControl";
 import ActionButton from "@/components/ActionButton";
 import EventCard from "@/components/EventCard";
 
+type Props = NativeStackScreenProps<RootStackParamList, "EventList">;
+
 type Filter = "upcoming" | "mine" | "past";
 
 const byDateAsc = (a: EventType, b: EventType) => new Date(a.date).getTime() - new Date(b.date).getTime();
 const byDateDesc = (a: EventType, b: EventType) => byDateAsc(b, a);
 
-export default function EventListScreen () {
+export default function EventListScreen ({navigation}: Props) {
     const {logout} = useAuth();
     const {events, isParticipating} = useEvents();
     const [filter, setFilter] = useState<Filter>("upcoming");
@@ -56,6 +60,9 @@ export default function EventListScreen () {
                         <Logo />
                         <View className="mt-10">
                             <SectionTitle title={t("events.title")} large />
+                        </View>
+                        <View className="mt-6">
+                            <ActionButton label={t("events.create")} onPress={() => navigation.navigate("EventForm", {})} />
                         </View>
                         <View className="mb-2 mt-8">
                             <SegmentedControl options={filterOptions} value={filter} onChange={setFilter} />
