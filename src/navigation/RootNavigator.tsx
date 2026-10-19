@@ -1,17 +1,20 @@
 import {createNativeStackNavigator} from "@react-navigation/native-stack";
 import {useAuth} from "@/context/AuthContext";
+import {useEvents} from "@/context/EventsContext";
 import {RootStackParamList} from "@/navigation/types";
 import {palette} from "@/theme/palette";
 import SignInScreen from "@/screens/SignInScreen";
 import SignUpScreen from "@/screens/SignUpScreen";
-import HomeScreen from "@/screens/HomeScreen";
+import EventListScreen from "@/screens/EventListScreen";
+import EventDetailScreen from "@/screens/EventDetailScreen";
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
 export default function RootNavigator () {
-    const {isAuthenticated, loading} = useAuth();
+    const {isAuthenticated, loading: authLoading} = useAuth();
+    const {loading: eventsLoading} = useEvents();
 
-    if (loading) return null;
+    if (authLoading || eventsLoading) return null;
 
     return (
         <Stack.Navigator
@@ -22,7 +25,10 @@ export default function RootNavigator () {
             }}
         >
             {isAuthenticated ? (
-                <Stack.Screen name="Home" component={HomeScreen} />
+                <>
+                    <Stack.Screen name="EventList" component={EventListScreen} />
+                    <Stack.Screen name="EventDetail" component={EventDetailScreen} />
+                </>
             ) : (
                 <>
                     <Stack.Screen name="SignIn" component={SignInScreen} />

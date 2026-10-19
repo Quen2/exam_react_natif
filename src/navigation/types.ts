@@ -1,7 +1,8 @@
 export type RootStackParamList = {
     SignIn: undefined;
     SignUp: undefined;
-    Home: undefined;
+    EventList: undefined;
+    EventDetail: {id: string};
 };
 
 declare global {
